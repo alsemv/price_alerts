@@ -1,7 +1,9 @@
 import uuid
 import src.models.users.errors as UserErrors
+import src.models.users.constants as UserConstants
 from src.common.database import Database
 from src.common.utils import Utils
+from src.models.alerts.alert import Alert
 
 
 class User(object):
@@ -15,7 +17,7 @@ class User(object):
 
     @staticmethod
     def is_login_valid(email, password):
-        user_data = Database.find_one("users", {"email": email})
+        user_data = Database.find_one(UserConstants.COLLECTION, {"email": email})
         if user_data is None:
             raise UserErrors.UserNotExistsError("Your user not exist.")
         if not Utils.check_hashed_password(password, user_data['password']):
@@ -25,7 +27,7 @@ class User(object):
 
     @staticmethod
     def register_user(email, password):
-        user_data = Database.find_one("users", {"email": email})
+        user_data = Database.find_one(UserConstants.COLLECTION, {"email": email})
 
         if user_data is not None:
             raise UserErrors.UserAlreadyRegisteredError("Email already exist.")
@@ -45,3 +47,10 @@ class User(object):
             'email': self.email,
             'password': self.password
         }
+
+    @classmethod
+    def find_by_email(cls, email):
+        return cls(**Database.find_one(UserConstants.COLLECTION, {'email': email}))
+
+    def get_alerts(self):
+        return Alert.find_by_user_email(self.email)

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-4">
+        <form action="{{ url_for('users.register_user') }}" method="post">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input id='email' class="form-control" type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id='password' class="form-control" type="password" name="password" placeholder="Password" required>
+            </div>
+             <button class="btn btn-default" type="submit" id="submit-button">Sign up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

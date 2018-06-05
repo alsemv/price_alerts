@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header mt-5">
+            <h2 class="border-bottom pb-4">Alerts <small class="font-weight-light">showing already existing alerts</small></h2>
+        </div>
+        <div class="list-group mb-3">
+            {% for alert in alerts %}
+            <a href="{{url_for('alerts.get_alert_page', alert_id=alert._id)}}" class="list-group-item list-group-item-action">
+                <h4>Alert for {{alert.item.name}}</h4>
+                <p>Last price found {{alert.item.price}} <br> Last checked on {{alert.last_checked.strftime("%d-%m-%Y at %H:%m")}}</p>
+            </a>
+            {% endfor %}
+        </div>
+        <a href="{{url_for('alerts.create_alert')}}" class="btn btn-success">Create new</a>
+    </div>
+{% endblock %}
