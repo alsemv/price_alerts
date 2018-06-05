@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>{{alert.item.name}}</p>
+<div class="container">
+    <div class="page-header mt-5">
+        <h2 class="border-bottom pb-4">Alert
+            <small class="font-weight-light">for {{alert.item.name}}</small>
+        </h2>
+    </div>
+
+    <p>Last price found {{alert.item.price}} <br> Last checked on {{alert.last_checked.strftime("%d-%m-%Y at %H:%m")}}</p>
+    <a class="btn btn-danger" href="{{url_for('alerts.deactivate_alert', alert_id=alert._id)}}" role="button">Deactivate Alert</a>
+    <a class="btn btn-warning" href="{{url_for('alerts.check_alert_price', alert_id=alert._id)}}" role="button">Check Price</a>
+</div>
+
 {% endblock %}

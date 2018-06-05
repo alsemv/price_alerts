@@ -22,4 +22,4 @@ def home():
 app.register_blueprint(user_blueprint, url_prefix="/users")
 app.register_blueprint(store_blueprint, url_prefix="/stores")
 app.register_blueprint(alert_blueprint, url_prefix="/alerts")
-
+#app.test_request_context('/new')
