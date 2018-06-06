@@ -8,8 +8,11 @@
         </h2>
     </div>
 
-    <p>Last price found {{alert.item.price}} <br> Last checked on {{alert.last_checked.strftime("%d-%m-%Y at %H:%m")}}</p>
+    <p>Last price found {{alert.item.price}} <br> Last checked on {{alert.last_checked.strftime("%d-%m-%Y at %H:%m")}}
+    </p>
+    {% if session['email'] in config.ADMINS %}
     <a class="btn btn-danger" href="{{url_for('alerts.deactivate_alert', alert_id=alert._id)}}" role="button">Deactivate Alert</a>
+    {% endif %}
     <a class="btn btn-warning" href="{{url_for('alerts.check_alert_price', alert_id=alert._id)}}" role="button">Check Price</a>
 </div>
 
